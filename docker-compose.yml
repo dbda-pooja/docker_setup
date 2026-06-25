@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0.36
+    container_name: mysql_test_container
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_changeme
+      MYSQL_DATABASE: test
+      MYSQL_USER: pooja
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u$$MYSQL_USER", "-p$$MYSQL_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  mysql_data:
+    name: mysql_test_data
+
+networks:
+  backend_network:
+    name: test_network
