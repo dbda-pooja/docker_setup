@@ -81,6 +81,7 @@ networks:
     name: local_dev_network
 ```
 🔍 Parameter Explanations for Beginners:
+
 image: mysql:8.0.36: Tells Docker the exact version blueprint to download. Picking a specific version number guarantees the database works identically on everyone's computer.
 
 environment:: Variables passed into the container box. The MySQL template reads these to automatically create our database name (test), our user account (pooja), and our passwords.
