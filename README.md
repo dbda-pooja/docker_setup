@@ -24,11 +24,12 @@ When developing software, installing databases directly onto your laptop creates
 |   Target Host Connection: localhost      |               |   Internal Port: 3306                  |
 |   Target Port Mapping:    3306           | -- Network -> |                                        |
 +------------------------------------------+               +----------------------------------------+
+```
 
 ⚡ Essential Docker Commands Cheatsheet
 Here are the only commands you need to know to manage this entire setup from your terminal:
 
-Bash
+```text
 # 1. Check which base templates (images) are already downloaded on your laptop
 docker images
 
@@ -46,11 +47,12 @@ docker compose down
 
 # 6. Completely wipe out containers AND their saved data storage for a total reset
 docker compose down -v
+```
 📄 The Configuration Blueprint (docker-compose.yml)
 Instead of typing long, messy terminal strings every time you want to start a database, we use Infrastructure as Code (IaC).
 
 Create a file named exactly docker-compose.yml in your project folder using VS Code, and paste the following content inside it:
-
+```text
 YAML
 services:
   # --- Service: Relational Database ---
@@ -77,6 +79,7 @@ volumes:
 networks:
   dev_network:
     name: local_dev_network
+```
 🔍 Parameter Explanations for Beginners:
 image: mysql:8.0.36: Tells Docker the exact version blueprint to download. Picking a specific version number guarantees the database works identically on everyone's computer.
 
@@ -106,7 +109,6 @@ Password: password
 Complete Connection URL String
 If you prefer pasting a single connection string directly into DBeaver's URL input block, use this:
 
-
 jdbc:mysql://localhost:3306/test?user=pooja&password=password&allowPublicKeyRetrieval=true&useSSL=false
 
 ⚠️ Crucial MySQL 8+ Fix: MySQL 8 uses an advanced password encryption protocol. When connecting external visual tools, you must go to the Driver Properties tab in DBeaver, find allowPublicKeyRetrieval and set it to TRUE, and set useSSL to FALSE. Otherwise, your connection will drop immediately!
@@ -114,6 +116,7 @@ jdbc:mysql://localhost:3306/test?user=pooja&password=password&allowPublicKeyRetr
 📊 Initializing the Data Model Schema
 Once connected via DBeaver, open an empty SQL Editor tab (Ctrl + Alt + T) and run this script to create a secure, data-validated student table:
 
+```text
 SQL
 CREATE TABLE student (
     student_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -131,6 +134,7 @@ CREATE TABLE student (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 Advanced Schema Highlights:
 utf8mb4: Full native support for international text characters, accents, and emojis.
+```
 
 ON UPDATE CURRENT_TIMESTAMP: Native database-level auditing. The database automatically logs exactly when a row changes without requiring custom code in a backend application layer.
 
