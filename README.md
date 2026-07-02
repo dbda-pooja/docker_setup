@@ -15,7 +15,7 @@ When developing software, installing databases directly onto your laptop creates
 2. **The Code Layer (VS Code):** Our code editor where we store configuration files like `docker-compose.yml`.
 3. **The Presentation Layer (DBeaver):** An external database Graphic User Interface (GUI) client. DBeaver acts as a dashboard wrapper so we can see tables, run queries, and visualize data without using a black command-line screen.
 
-
+'''text
 +------------------------------------------+               +----------------------------------------+
 |               YOUR LAPTOP                |               |            DOCKER CONTAINER            |
 |                                          |               |                                        |
@@ -24,6 +24,7 @@ When developing software, installing databases directly onto your laptop creates
 |   Target Host Connection: localhost      |               |   Internal Port: 3306                  |
 |   Target Port Mapping:    3306           | -- Network -> |                                        |
 +------------------------------------------+               +----------------------------------------+
+
 ⚡ Essential Docker Commands Cheatsheet
 Here are the only commands you need to know to manage this entire setup from your terminal:
 
